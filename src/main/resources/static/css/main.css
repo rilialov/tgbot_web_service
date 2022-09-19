@@ -1,0 +1,53 @@
+body {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+.all {
+    margin: 0 auto;
+    max-width: 1200px;
+    font-size: 14px;
+    background: #FFFFFF;
+    box-shadow: 0 0 10px #555555;
+}
+
+header {
+    margin: 0 10px;
+    min-height: 160px;
+}
+
+main {
+    padding: 0 20px 20px;
+    min-height: 500px;
+}
+
+.navbar a {
+    color: #636363;
+    text-decoration: none;
+}
+
+.navbar li {
+    text-align: right;
+    border-bottom: solid 1px #2EB845;
+}
+
+fieldset.scheduler-border {
+    border: 1px groove #ddd !important;
+    padding: 0 1.4em 1.4em 1.4em !important;
+    margin: 0 0 1.5em 0 !important;
+    -webkit-box-shadow:  0 0 0 0 #000;
+    box-shadow:  0 0 0 0 #000;
+}
+
+legend.scheduler-border {
+    width:inherit;
+    padding:0 10px;
+    border-bottom:none;
+}
+
+footer {
+    padding: 10px 20px 10px 20px;
+    background: #555555;
+    box-shadow: 0 0 10px #555555;
+    color: #FFFFFF;
+    font-size: 10px;
+}

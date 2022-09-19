@@ -1,0 +1,61 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <title>Users List</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <!--/*/ <th:block th:include="template.html :: stylesheet"></th:block> /*/-->
+</head>
+<body>
+<div class="all">
+    <header>
+        <div th:insert="~{template :: header}"></div>
+    </header>
+    <main>
+        <div class="container">
+            <div class="row">
+                <div class="col-2">
+
+                </div>
+                <div class="col-10">
+                    <h2>Users List</h2>
+                    <table class="table table-bordered table-striped">
+                        <thead class="thead-light">
+                        <tr>
+                            <th>ID</th>
+                            <th>NickName</th>
+                            <th>First Name</th>
+                            <th>Last Name</th>
+                            <th>Team</th>
+                            <th>Role</th>
+                            <th>Edit</th>
+                            <th>Delete</th>
+                        </tr>
+                        </thead>
+                        <tr th:each="user : ${users}">
+                            <td th:utext="${user.chatID}">..</td>
+                            <td th:utext="${user.nickname}">..</td>
+                            <td th:utext="${user.firstName}">..</td>
+                            <td th:utext="${user.lastName}">..</td>
+                            <td th:utext="${user.team != null} ? ${user.team.teamColor} : ''">..</td>
+                            <td th:utext="${user.role}">..</td>
+                            <td>
+                                <a th:href="@{/manager/updateUser(userID=${user.chatID})}"><i
+                                        class="bi bi-file-earmark-text"></i></a>
+                            </td>
+                            <td>
+                                <a th:href="@{/manager/deleteUser(userID=${user.chatID})}"><i
+                                        class="bi bi-trash"></i></a>
+                            </td>
+                        </tr>
+                    </table>
+
+                </div>
+            </div>
+        </div>
+    </main>
+    <footer>
+        <div th:insert="~{template :: footer}"></div>
+    </footer>
+</div>
+</body>
+</html>

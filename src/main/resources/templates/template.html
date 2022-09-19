@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <div th:fragment="stylesheet">
+        <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"/>
+        <link rel="stylesheet" type="text/css" th:href="@{/css/main.css}"/>
+    </div>
+</head>
+<body>
+<div th:fragment="header">
+    <div class="d-flex justify-content-center"><a href="/"><img th:src="@{/images/logo.png}" alt="logo"></a></div>
+</div>
+<div th:fragment="footer">
+    Copyright © 2021
+</div>
+</body>
+</html>
