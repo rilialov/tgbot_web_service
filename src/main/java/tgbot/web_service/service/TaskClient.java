@@ -33,9 +33,9 @@ public class TaskClient {
                 .get()
                 .uri(TASKS_URI)
                 .retrieve()
-                .bodyToFlux(Task.class)
-                .collectList()
-                .block();
+                .bodyToMono(Response.class)
+                .block()
+                .getContent();
     }
 
     public Task createTask(Task task) {

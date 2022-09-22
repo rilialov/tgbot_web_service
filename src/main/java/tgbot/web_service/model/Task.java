@@ -52,7 +52,9 @@ public class Task {
     @Override
     public String toString() {
         return "Task{" +
-                "taskName='" + taskName + '\'' +
+                "id=" + id +
+                ", taskName='" + taskName + '\'' +
+                ", taskNote='" + taskNote + '\'' +
                 '}';
     }
 }
