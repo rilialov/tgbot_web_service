@@ -33,9 +33,9 @@ public class ReportClient {
                 .get()
                 .uri(REPORTS_URI)
                 .retrieve()
-                .bodyToFlux(Report.class)
-                .collectList()
-                .block();
+                .bodyToMono(Response.class)
+                .block()
+                .getContent();
     }
 
     public Report createReport(Report report) {

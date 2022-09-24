@@ -31,23 +31,36 @@ class TaskClientIT {
     @Test
     void getAllTask() {
         List<Task> allTasks = taskClient.getAllTasks();
+
         assertNotNull(allTasks);
         assertTrue(allTasks.size() > 0);
+
         for (int i = 0; i < allTasks.size(); i++) {
             logger.info(String.valueOf(allTasks.get(i)));
         }
     }
 
-
     @Test
     void createTask() {
+        List<Task> allTasks = taskClient.getAllTasks();
+        assertNotNull(allTasks);
+        for (int i = 0; i < allTasks.size(); i++) {
+            logger.info(String.valueOf(allTasks.get(i)));
+        }
+
         Task task = new Task("Test Task Name", "Test Task Note");
 
         Task created = taskClient.createTask(task);
 
         assertEquals("Test Task Name", created.getTaskName());
         assertEquals("Test Task Note", created.getTaskNote());
-        logger.info(created.toString());
+
+        List<Task> updatedTasks = taskClient.getAllTasks();
+        assertNotNull(updatedTasks);
+        logger.info("Updated List:");
+        for (int i = 0; i < updatedTasks.size(); i++) {
+            logger.info(String.valueOf(updatedTasks.get(i)));
+        }
     }
 
     @Test
@@ -60,6 +73,8 @@ class TaskClientIT {
 
         Task updated = taskClient.getTask("2");
         assertEquals("Changed Note", updated.getTaskNote());
+
+        logger.info("Updated Task:");
         logger.info(updated.toString());
     }
 
@@ -78,6 +93,7 @@ class TaskClientIT {
 
         List<Task> updatedTasks = taskClient.getAllTasks();
         assertNotNull(updatedTasks);
+        logger.info("Updated List:");
         for (int i = 0; i < updatedTasks.size(); i++) {
             logger.info(String.valueOf(updatedTasks.get(i)));
         }

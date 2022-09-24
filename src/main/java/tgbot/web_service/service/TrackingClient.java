@@ -11,7 +11,7 @@ public class TrackingClient {
 
     private WebClient webClient;
 
-    private static final String TRACKING_URI = "/trackings/";
+    private static final String TRACKING_URI = "/tracking/";
 
     public void setParameters(String address) {
         webClient = WebClient.create(address);
@@ -33,9 +33,9 @@ public class TrackingClient {
                 .get()
                 .uri(TRACKING_URI)
                 .retrieve()
-                .bodyToFlux(Tracking.class)
-                .collectList()
-                .block();
+                .bodyToMono(Response.class)
+                .block()
+                .getContent();
     }
 
     public Tracking createTracking(Tracking tracking) {

@@ -79,4 +79,15 @@ public class Tracking {
     public int hashCode() {
         return Objects.hash(id, startTime, trackingNote);
     }
+
+    @Override
+    public String toString() {
+        return "Tracking{" +
+                "id=" + id +
+                ", startTime=" + startTime +
+                ", endTime=" + endTime +
+                ", trackingNote='" + trackingNote + '\'' +
+                ", user=" + user +
+                '}';
+    }
 }

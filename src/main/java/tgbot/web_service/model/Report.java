@@ -61,4 +61,14 @@ public class Report {
     public int hashCode() {
         return Objects.hash(id, date, fullTime);
     }
+
+    @Override
+    public String toString() {
+        return "Report{" +
+                "id=" + id +
+                ", date=" + date +
+                ", fullTime=" + fullTime +
+                ", user=" + user +
+                '}';
+    }
 }
