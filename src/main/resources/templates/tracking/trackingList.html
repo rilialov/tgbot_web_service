@@ -1,0 +1,59 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <title>Tracking List</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <!--/*/ <th:block th:include="template.html :: stylesheet"></th:block> /*/-->
+</head>
+<body>
+<div class="all">
+    <header>
+        <div th:insert="~{template :: header}"></div>
+    </header>
+    <main>
+        <div class="container">
+            <div class="row">
+                <div class="col-2">
+
+                </div>
+                <div class="col-10">
+                    <h2>Tracking List</h2>
+                    <table class="table table-bordered table-striped">
+                        <thead class="thead-light">
+                        <tr>
+                            <th>ID</th>
+                            <th>Start time</th>
+                            <th>End time</th>
+                            <th>Tracking note</th>
+                            <th>Task</th>
+                            <th>User</th>
+                            <th>Edit</th>
+                            <th>Delete</th>
+                        </tr>
+                        </thead>
+                        <tr th:each="tracking : ${trackings}">
+                            <td th:utext="${tracking.id}">..</td>
+                            <td th:utext="${tracking.startTime}">..</td>
+                            <td th:utext="${tracking.endTime}">..</td>
+                            <td th:utext="${tracking.trackingNote}">..</td>
+                            <td th:utext="${tracking.task.taskName}">..</td>
+                            <td th:utext="${tracking.user}">..</td>
+                            <td>
+
+                            </td>
+                            <td>
+
+                            </td>
+                        </tr>
+                    </table>
+
+                </div>
+            </div>
+        </div>
+    </main>
+    <footer>
+        <div th:insert="~{template :: footer}"></div>
+    </footer>
+</div>
+</body>
+</html>

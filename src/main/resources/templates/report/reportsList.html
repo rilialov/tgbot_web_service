@@ -1,0 +1,55 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <title>Reports List</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <!--/*/ <th:block th:include="template.html :: stylesheet"></th:block> /*/-->
+</head>
+<body>
+<div class="all">
+    <header>
+        <div th:insert="~{template :: header}"></div>
+    </header>
+    <main>
+        <div class="container">
+            <div class="row">
+                <div class="col-2">
+
+                </div>
+                <div class="col-10">
+                    <h2>Reports List</h2>
+                    <table class="table table-bordered table-striped">
+                        <thead class="thead-light">
+                        <tr>
+                            <th>ID</th>
+                            <th>Date</th>
+                            <th>Full time</th>
+                            <th>User</th>
+                            <th>Edit</th>
+                            <th>Delete</th>
+                        </tr>
+                        </thead>
+                        <tr th:each="report : ${reports}">
+                            <td th:utext="${report.id}">..</td>
+                            <td th:utext="${report.date}">..</td>
+                            <td th:utext="${report.fullTime}">..</td>
+                            <td th:utext="${report.user}">..</td>
+                            <td>
+
+                            </td>
+                            <td>
+
+                            </td>
+                        </tr>
+                    </table>
+
+                </div>
+            </div>
+        </div>
+    </main>
+    <footer>
+        <div th:insert="~{template :: footer}"></div>
+    </footer>
+</div>
+</body>
+</html>
