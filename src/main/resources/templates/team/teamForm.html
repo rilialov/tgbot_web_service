@@ -1,0 +1,49 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <title th:text="${title}"></title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <!--/*/ <th:block th:include="template.html :: stylesheet"></th:block> /*/-->
+</head>
+<body>
+<div class="all">
+    <header>
+        <div th:insert="~{template :: header}"></div>
+    </header>
+    <main>
+        <div class="container">
+            <div class="row">
+                <div class="col-2">
+
+                </div>
+                <div class="col-10">
+                    <h2 th:text="${title}"></h2>
+                    <div class="row">
+                        <div class="col container">
+                            <form th:action="${form}" method="post">
+                                <input type="hidden" th:value="${team?.id}" name="ID"/>
+                                <div class="form-group">
+                                    <label for="teamName">Team name:</label>
+                                    <input class="form-control" type="text" id="teamName" name="teamName"
+                                           th:value="${team?.teamName}" maxlength="30" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="teamColor">Team color:</label>
+                                    <input class="form-control" type="text" id="teamColor" name="teamColor"
+                                           th:value="${team?.teamColor}" maxlength="30" required>
+                                </div>
+                                <button type="submit" class="btn btn-primary">OK</button>
+                            </form>
+                        </div>
+                        <div class="col"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <footer>
+        <div th:insert="~{template :: footer}"></div>
+    </footer>
+</div>
+</body>
+</html>

@@ -33,14 +33,16 @@
                             <td th:utext="${team.teamName}">..</td>
                             <td th:utext="${team.teamColor}">..</td>
                             <td>
-
+                                <a th:href="@{/updateTeam(teamID=${team.id})}"><i
+                                        class="bi bi-file-earmark-text"></i></a>
                             </td>
                             <td>
 
                             </td>
                         </tr>
                     </table>
-
+                    <a class="btn btn-primary" th:href="@{/createTeam}" role="button">Create <i
+                            class="bi bi-file-earmark-plus"></i></a>
                 </div>
             </div>
         </div>
