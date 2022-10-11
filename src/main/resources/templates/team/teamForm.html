@@ -20,17 +20,17 @@
                     <h2 th:text="${title}"></h2>
                     <div class="row">
                         <div class="col container">
-                            <form th:action="${form}" method="post">
-                                <input type="hidden" th:value="${team?.id}" name="ID"/>
+                            <form th:object="${team}" th:action="@{/teams}" method="post">
+                                <input type="hidden" th:field="*{id}"/>
                                 <div class="form-group">
                                     <label for="teamName">Team name:</label>
-                                    <input class="form-control" type="text" id="teamName" name="teamName"
-                                           th:value="${team?.teamName}" maxlength="30" required>
+                                    <input class="form-control" type="text" id="teamName"
+                                           th:field="*{teamName}" maxlength="30" required>
                                 </div>
                                 <div class="form-group">
                                     <label for="teamColor">Team color:</label>
-                                    <input class="form-control" type="text" id="teamColor" name="teamColor"
-                                           th:value="${team?.teamColor}" maxlength="30" required>
+                                    <input class="form-control" type="text" id="teamColor"
+                                           th:field="*{teamColor}" maxlength="30" required>
                                 </div>
                                 <button type="submit" class="btn btn-primary">OK</button>
                             </form>
