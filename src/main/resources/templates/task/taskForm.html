@@ -20,24 +20,18 @@
                     <h2 th:text="${title}"></h2>
                     <div class="row">
                         <div class="col container">
-                            <form th:action="${form}" method="post">
-                                <input type="hidden" th:value="${user?.chatID}" name="userID"/>
+                            <form th:object="${task}" th:action="@{/tasks}" method="post">
+                                <input type="hidden" th:field="*{id}"/>
                                 <div class="form-group">
-                                    <label for="nickname">NickName:</label>
-                                    <input class="form-control" type="text" id="nickname" name="nickname"
-                                           th:value="${user?.nickname}" maxlength="30" required>
+                                    <label for="taskName">Task name:</label>
+                                    <input class="form-control" type="text" id="taskName"
+                                           th:field="*{taskName}" maxlength="30" required>
                                 </div>
                                 <div class="form-group">
-                                    <label for="firstName">First Name:</label>
-                                    <input class="form-control" type="text" id="firstName" name="firstName"
-                                           maxlength="30" required>
+                                    <label for="taskNote">Task note:</label>
+                                    <input class="form-control" type="text" id="taskNote"
+                                           th:field="*{taskNote}" maxlength="30" required>
                                 </div>
-                                <div class="form-group">
-                                    <label for="lastName">Last Name:</label>
-                                    <input class="form-control" type="text" id="lastName" name="lastName"
-                                           maxlength="30" required>
-                                </div>
-
                                 <button type="submit" class="btn btn-primary">OK</button>
                             </form>
                         </div>
