@@ -30,7 +30,8 @@ class TaskClientIT {
 
     @Test
     void getAllTask() {
-        List<Task> allTasks = taskClient.getAllTasks();
+        Response response = taskClient.getAllTasks(0, 10);
+        List<Task> allTasks = response.getContent();
 
         assertNotNull(allTasks);
         assertTrue(allTasks.size() > 0);
@@ -42,7 +43,8 @@ class TaskClientIT {
 
     @Test
     void createTask() {
-        List<Task> allTasks = taskClient.getAllTasks();
+        Response response = taskClient.getAllTasks(0, 10);
+        List<Task> allTasks = response.getContent();
         assertNotNull(allTasks);
         for (int i = 0; i < allTasks.size(); i++) {
             logger.info(String.valueOf(allTasks.get(i)));
@@ -55,7 +57,8 @@ class TaskClientIT {
         assertEquals("Test Task Name", created.getTaskName());
         assertEquals("Test Task Note", created.getTaskNote());
 
-        List<Task> updatedTasks = taskClient.getAllTasks();
+        Response updatedResponse = taskClient.getAllTasks(0, 10);
+        List<Task> updatedTasks = updatedResponse.getContent();
         assertNotNull(updatedTasks);
         logger.info("Updated List:");
         for (int i = 0; i < updatedTasks.size(); i++) {
@@ -80,7 +83,8 @@ class TaskClientIT {
 
     @Test
     void deleteTask() {
-        List<Task> allTasks = taskClient.getAllTasks();
+        Response response = taskClient.getAllTasks(0, 10);
+        List<Task> allTasks = response.getContent();
         assertNotNull(allTasks);
         for (int i = 0; i < allTasks.size(); i++) {
             logger.info(String.valueOf(allTasks.get(i)));
@@ -91,7 +95,8 @@ class TaskClientIT {
         Task deleted = taskClient.getTask("4");
         assertNull(deleted);
 
-        List<Task> updatedTasks = taskClient.getAllTasks();
+        Response updatedResponse = taskClient.getAllTasks(0, 10);
+        List<Task> updatedTasks = updatedResponse.getContent();
         assertNotNull(updatedTasks);
         logger.info("Updated List:");
         for (int i = 0; i < updatedTasks.size(); i++) {

@@ -7,7 +7,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import tgbot.web_service.model.Task;
+import tgbot.web_service.service.Response;
 import tgbot.web_service.service.TaskClient;
+
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 @Controller
 @RequestMapping(value = "/tasks")
@@ -20,8 +25,28 @@ public class TasksController {
     }
 
     @GetMapping
-    public String tasksList(Model model) {
-        model.addAttribute("tasks", taskClient.getAllTasks());
+    public String tasksList(Integer page, Integer size, Model model) {
+        if (page == null) {
+            page = 1;
+        }
+        if (size == null) {
+            size = 10;
+        }
+        Response response = taskClient.getAllTasks(page-1, size);
+        model.addAttribute("tasks", response.getContent());
+        model.addAttribute("totalPages", response.getTotalPages());
+        List<Integer> pageNumbers;
+        if (page < response.getTotalPages()) {
+            if (page > 1) {
+                pageNumbers = IntStream.rangeClosed(page - 1, page + 1).boxed().collect(Collectors.toList());
+            } else pageNumbers = IntStream.rangeClosed(page, page + 1).boxed().collect(Collectors.toList());
+        } else {
+            if (response.getTotalPages() == 1) {
+                pageNumbers = IntStream.rangeClosed(page, page).boxed().collect(Collectors.toList());
+            } else pageNumbers = IntStream.rangeClosed(page - 1, page).boxed().collect(Collectors.toList());
+        }
+        model.addAttribute("pageNumbers", pageNumbers);
+        model.addAttribute("page", page);
         return "task/tasksList";
     }
 

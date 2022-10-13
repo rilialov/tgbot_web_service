@@ -5,8 +5,6 @@ import org.springframework.web.reactive.function.client.WebClientResponseExcepti
 import reactor.core.publisher.Mono;
 import tgbot.web_service.model.Task;
 
-import java.util.List;
-
 public class TaskClient {
 
     private WebClient webClient;
@@ -28,14 +26,13 @@ public class TaskClient {
                 .block();
     }
 
-    public List<Task> getAllTasks() {
+    public Response getAllTasks(int page, int size) {
         return webClient
                 .get()
-                .uri(TASKS_URI)
+                .uri(TASKS_URI + "?page=" + page + "&size=" + size)
                 .retrieve()
                 .bodyToMono(Response.class)
-                .block()
-                .getContent();
+                .block();
     }
 
     public Task createTask(Task task) {

@@ -42,6 +42,21 @@
                             </td>
                         </tr>
                     </table>
+                    <div class="row">
+                        <div class="col"></div>
+                        <div class="col">
+                            <ul class="pagination">
+                                <li th:if="${totalPages > 0}" class="page-item"
+                                    th:each="pageNumber : ${pageNumbers}"
+                                    th:class="${pageNumber == page} ? 'page-item active' : 'page-item'">
+                                    <a th:href="@{/tasks(page=${pageNumber}, size=10)}"
+                                       th:text="${pageNumber}"
+                                       class="page-link"></a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="col"></div>
+                    </div>
                     <a class="btn btn-primary" th:href="${'/tasks/new'}" role="button">Create <i
                             class="bi bi-file-earmark-plus"></i></a>
                 </div>
