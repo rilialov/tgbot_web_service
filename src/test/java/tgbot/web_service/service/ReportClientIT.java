@@ -32,7 +32,8 @@ class ReportClientIT {
 
     @Test
     void getAllReports() {
-        List<Report> allReports = reportClient.getAllReports();
+        Response response = reportClient.getAllReports(0, 10);
+        List<Report> allReports = response.getContent();
 
         assertNotNull(allReports);
         assertTrue(allReports.size() > 0);
@@ -44,7 +45,8 @@ class ReportClientIT {
 
     @Test
     void createReport() {
-        List<Report> allReports = reportClient.getAllReports();
+        Response response = reportClient.getAllReports(0, 10);
+        List<Report> allReports = response.getContent();
         assertNotNull(allReports);
         for (int i = 0; i < allReports.size(); i++) {
             logger.info(String.valueOf(allReports.get(i)));
@@ -56,7 +58,8 @@ class ReportClientIT {
 
         assertEquals(2L, created.getUser());
 
-        List<Report> updatedReports = reportClient.getAllReports();
+        Response updatedResponse = reportClient.getAllReports(0, 10);
+        List<Report> updatedReports = updatedResponse.getContent();
         assertNotNull(updatedReports);
         logger.info("Updated List:");
         for (int i = 0; i < updatedReports.size(); i++) {
@@ -81,7 +84,8 @@ class ReportClientIT {
 
     @Test
     void deleteReport() {
-        List<Report> allReports = reportClient.getAllReports();
+        Response response = reportClient.getAllReports(0, 10);
+        List<Report> allReports = response.getContent();
         assertNotNull(allReports);
         for (int i = 0; i < allReports.size(); i++) {
             logger.info(String.valueOf(allReports.get(i)));
@@ -92,7 +96,8 @@ class ReportClientIT {
         Report deleted = reportClient.getReport("10");
         assertNull(deleted);
 
-        List<Report> updatedReports = reportClient.getAllReports();
+        Response updatedResponse = reportClient.getAllReports(0, 10);
+        List<Report> updatedReports = updatedResponse.getContent();
         assertNotNull(updatedReports);
         logger.info("Updated List:");
         for (int i = 0; i < updatedReports.size(); i++) {

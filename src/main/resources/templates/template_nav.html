@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <div th:fragment="stylesheet">
+        <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap-icons/font/bootstrap-icons.css}"/>
+    </div>
+    <title>Template</title>
+</head>
+<body>
+<div th:fragment="menu">
+    <nav class="navbar">
+        <ul class="nav flex-column">
+            <li><a th:href="@{/tasks}">Tasks List</a></li>
+            <li><a th:href="@{/reports}">Reports List</a></li>
+        </ul>
+    </nav>
+</div>
+</body>
+</html>

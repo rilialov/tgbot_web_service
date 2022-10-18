@@ -5,8 +5,6 @@ import org.springframework.web.reactive.function.client.WebClientResponseExcepti
 import reactor.core.publisher.Mono;
 import tgbot.web_service.model.Report;
 
-import java.util.List;
-
 public class ReportClient {
 
     private WebClient webClient;
@@ -28,14 +26,13 @@ public class ReportClient {
                 .block();
     }
 
-    public List<Report> getAllReports() {
+    public Response getAllReports(int page, int size) {
         return webClient
                 .get()
-                .uri(REPORTS_URI)
+                .uri(REPORTS_URI + "?page=" + page + "&size=" + size)
                 .retrieve()
                 .bodyToMono(Response.class)
-                .block()
-                .getContent();
+                .block();
     }
 
     public Report createReport(Report report) {

@@ -14,7 +14,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-2">
-
+                    <div th:insert="~{template_nav :: menu}"></div>
                 </div>
                 <div class="col-10">
                     <h2>Reports List</h2>
@@ -25,24 +25,40 @@
                             <th>Date</th>
                             <th>Full time</th>
                             <th>User</th>
-                            <th>Edit</th>
-                            <th>Delete</th>
                         </tr>
                         </thead>
                         <tr th:each="report : ${reports}">
-                            <td th:utext="${report.id}">..</td>
-                            <td th:utext="${report.date}">..</td>
-                            <td th:utext="${report.fullTime}">..</td>
-                            <td th:utext="${report.user}">..</td>
-                            <td>
-
-                            </td>
-                            <td>
-
-                            </td>
+                            <td th:text="${report.id}">..</td>
+                            <td th:text="${report.date}">..</td>
+                            <td th:text="${report.fullTime/3600}">..</td>
+                            <td th:text="${report.user}">..</td>
                         </tr>
                     </table>
-
+                    <div class="row">
+                        <div class="col"></div>
+                        <div class="col">
+                            <ul class="pagination">
+                                <li th:class="${page == 1} ? 'page-item disabled' : 'page-item'">
+                                    <a class="page-link" th:href="@{/reports(page=1, size=10)}" aria-label="Previous">
+                                        <span aria-hidden="true">&laquo;</span>
+                                    </a>
+                                </li>
+                                <li th:if="${totalPages > 0}" class="page-item"
+                                    th:each="pageNumber : ${pageNumbers}"
+                                    th:class="${pageNumber == page} ? 'page-item active' : 'page-item'">
+                                    <a th:href="@{/reports(page=${pageNumber}, size=10)}"
+                                       th:text="${pageNumber}"
+                                       class="page-link"></a>
+                                </li>
+                                <li th:class="${page == totalPages} ? 'page-item disabled' : 'page-item'">
+                                    <a class="page-link" th:href="@{/reports(page=${totalPages}, size=10)}" aria-label="Next">
+                                        <span aria-hidden="true">&raquo;</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="col"></div>
+                    </div>
                 </div>
             </div>
         </div>

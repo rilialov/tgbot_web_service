@@ -14,7 +14,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-2">
-
+                    <div th:insert="~{template_nav :: menu}"></div>
                 </div>
                 <div class="col-10">
                     <h2>Tasks List</h2>
@@ -29,9 +29,9 @@
                         </tr>
                         </thead>
                         <tr th:each="task : ${tasks}">
-                            <td th:utext="${task.id}">..</td>
-                            <td th:utext="${task.taskName}">..</td>
-                            <td th:utext="${task.taskNote}">..</td>
+                            <td th:text="${task.id}">..</td>
+                            <td th:text="${task.taskName}">..</td>
+                            <td th:text="${task.taskNote}">..</td>
                             <td>
                                 <a th:href="${'/tasks/edit/' + task.id}"><i
                                         class="bi bi-file-earmark-text"></i></a>
@@ -46,12 +46,22 @@
                         <div class="col"></div>
                         <div class="col">
                             <ul class="pagination">
+                                <li th:class="${page == 1} ? 'page-item disabled' : 'page-item'">
+                                    <a class="page-link" th:href="@{/tasks(page=1, size=10)}" aria-label="Previous">
+                                        <span aria-hidden="true">&laquo;</span>
+                                    </a>
+                                </li>
                                 <li th:if="${totalPages > 0}" class="page-item"
                                     th:each="pageNumber : ${pageNumbers}"
                                     th:class="${pageNumber == page} ? 'page-item active' : 'page-item'">
                                     <a th:href="@{/tasks(page=${pageNumber}, size=10)}"
                                        th:text="${pageNumber}"
                                        class="page-link"></a>
+                                </li>
+                                <li th:class="${page == totalPages} ? 'page-item disabled' : 'page-item'">
+                                    <a class="page-link" th:href="@{/tasks(page=${totalPages}, size=10)}" aria-label="Next">
+                                        <span aria-hidden="true">&raquo;</span>
+                                    </a>
                                 </li>
                             </ul>
                         </div>
