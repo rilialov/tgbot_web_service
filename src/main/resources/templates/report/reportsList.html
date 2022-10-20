@@ -18,6 +18,16 @@
                 </div>
                 <div class="col-10">
                     <h2>Reports List</h2>
+                    <div class="col container mb-2">
+                        <div class="col-2">
+                            <label for="size">Size:</label>
+                            <select class="form-select" id="size">
+                                <option selected value="10">10</option>
+                                <option value="15">15</option>
+                                <option value="20">20</option>
+                            </select>
+                        </div>
+                    </div>
                     <table class="table table-bordered table-striped">
                         <thead class="thead-light">
                         <tr>
@@ -51,7 +61,8 @@
                                        class="page-link"></a>
                                 </li>
                                 <li th:class="${page == totalPages} ? 'page-item disabled' : 'page-item'">
-                                    <a class="page-link" th:href="@{/reports(page=${totalPages}, size=10)}" aria-label="Next">
+                                    <a class="page-link" th:href="@{/reports(page=${totalPages}, size=10)}"
+                                       aria-label="Next">
                                         <span aria-hidden="true">&raquo;</span>
                                     </a>
                                 </li>
