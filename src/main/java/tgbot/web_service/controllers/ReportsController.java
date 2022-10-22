@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import tgbot.web_service.service.ReportClient;
 import tgbot.web_service.service.Response;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -44,6 +45,9 @@ public class ReportsController {
         }
         model.addAttribute("pageNumbers", pageNumbers);
         model.addAttribute("page", page);
+        List<Integer> sizes = Arrays.asList(10, 15, 20);
+        model.addAttribute("sizes", sizes);
+        model.addAttribute("pageSize", size);
         return "report/reportsList";
     }
 }

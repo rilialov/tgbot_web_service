@@ -10,6 +10,7 @@ import tgbot.web_service.model.Task;
 import tgbot.web_service.service.Response;
 import tgbot.web_service.service.TaskClient;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -47,6 +48,9 @@ public class TasksController {
         }
         model.addAttribute("pageNumbers", pageNumbers);
         model.addAttribute("page", page);
+        List<Integer> sizes = Arrays.asList(10, 15, 20);
+        model.addAttribute("sizes", sizes);
+        model.addAttribute("pageSize", size);
         return "task/tasksList";
     }
 

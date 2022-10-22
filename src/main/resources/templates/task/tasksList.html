@@ -22,9 +22,8 @@
                         <div class="col-2">
                             <label for="size">Size:</label>
                             <select onchange="myFunction(this)" class="form-select" id="size">
-                                <option selected value="10">10</option>
-                                <option value="15">15</option>
-                                <option value="20">20</option>
+                                <option th:each="size : ${sizes}" th:value="${size}" th:text="${size}"
+                                        th:selected="${size==pageSize}"></option>
                             </select>
                         </div>
                     </div>
@@ -57,19 +56,19 @@
                         <div class="col">
                             <ul class="pagination">
                                 <li th:class="${page == 1} ? 'page-item disabled' : 'page-item'">
-                                    <a class="page-link" th:href="@{/tasks(page=1)}" aria-label="Previous">
+                                    <a class="page-link" th:href="@{/tasks(page=1, size=${pageSize})}" aria-label="Previous">
                                         <span aria-hidden="true">&laquo;</span>
                                     </a>
                                 </li>
                                 <li th:if="${totalPages > 0}" class="page-item"
                                     th:each="pageNumber : ${pageNumbers}"
                                     th:class="${pageNumber == page} ? 'page-item active' : 'page-item'">
-                                    <a th:href="@{/tasks(page=${pageNumber})}"
+                                    <a th:href="@{/tasks(page=${pageNumber}, size=${pageSize})}"
                                        th:text="${pageNumber}"
                                        class="page-link"></a>
                                 </li>
                                 <li th:class="${page == totalPages} ? 'page-item disabled' : 'page-item'">
-                                    <a class="page-link" th:href="@{/tasks(page=${totalPages})}" aria-label="Next">
+                                    <a class="page-link" th:href="@{/tasks(page=${totalPages}, size=${pageSize})}" aria-label="Next">
                                         <span aria-hidden="true">&raquo;</span>
                                     </a>
                                 </li>
@@ -88,15 +87,10 @@
     </footer>
     <script>
         function myFunction(selectObject) {
-            var elements = document.getElementsByClassName('page-link');
+            var url = new URL(window.location.href);
             var value = selectObject.value;
-            for (var i = 0; i < elements.length; i++) {
-                if (elements.setAttribute !== 'function') {
-                    elements[i].href = elements[i].href + '&size=' + value;
-                } else {
-                    elements[i].setAttribute('href', elements[i].href + '&size=' + value);
-                }
-            }
+            url.searchParams.set('size', value);
+            location.href = url.href;
         }
     </script>
 </div>
