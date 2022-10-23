@@ -28,14 +28,13 @@ public class TrackingClient {
                 .block();
     }
 
-    public List<Tracking> getAllTracking() {
+    public Response getAllTracking(int page, int size) {
         return webClient
                 .get()
-                .uri(TRACKING_URI)
+                .uri(TRACKING_URI + "?page=" + page + "&size=" + size)
                 .retrieve()
                 .bodyToMono(Response.class)
-                .block()
-                .getContent();
+                .block();
     }
 
     public Tracking createTracking(Tracking tracking) {

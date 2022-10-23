@@ -14,10 +14,19 @@
         <div class="container">
             <div class="row">
                 <div class="col-2">
-
+                    <div th:insert="~{template_nav :: menu}"></div>
                 </div>
                 <div class="col-10">
                     <h2>Tracking List</h2>
+                    <div class="col container mb-2">
+                        <div class="col-2">
+                            <label for="size">Size:</label>
+                            <select onchange="myFunction(this)" class="form-select" id="size">
+                                <option th:each="size : ${sizes}" th:value="${size}" th:text="${size}"
+                                        th:selected="${size==pageSize}"></option>
+                            </select>
+                        </div>
+                    </div>
                     <table class="table table-bordered table-striped">
                         <thead class="thead-light">
                         <tr>
@@ -46,7 +55,33 @@
                             </td>
                         </tr>
                     </table>
-
+                    <div class="row">
+                        <div class="col"></div>
+                        <div class="col">
+                            <ul class="pagination">
+                                <li th:class="${page == 1} ? 'page-item disabled' : 'page-item'">
+                                    <a class="page-link" th:href="@{/reports(page=1, size=${pageSize})}"
+                                       aria-label="Previous">
+                                        <span aria-hidden="true">&laquo;</span>
+                                    </a>
+                                </li>
+                                <li th:if="${totalPages > 0}" class="page-item"
+                                    th:each="pageNumber : ${pageNumbers}"
+                                    th:class="${pageNumber == page} ? 'page-item active' : 'page-item'">
+                                    <a th:href="@{/reports(page=${pageNumber}, size=${pageSize})}"
+                                       th:text="${pageNumber}"
+                                       class="page-link"></a>
+                                </li>
+                                <li th:class="${page == totalPages} ? 'page-item disabled' : 'page-item'">
+                                    <a class="page-link" th:href="@{/reports(page=${totalPages}, size=${pageSize})}"
+                                       aria-label="Next">
+                                        <span aria-hidden="true">&raquo;</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="col"></div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -54,6 +89,14 @@
     <footer>
         <div th:insert="~{template :: footer}"></div>
     </footer>
+    <script>
+        function myFunction(selectObject) {
+            var url = new URL(window.location.href);
+            var value = selectObject.value;
+            url.searchParams.set('size', value);
+            location.href = url.href;
+        }
+    </script>
 </div>
 </body>
 </html>

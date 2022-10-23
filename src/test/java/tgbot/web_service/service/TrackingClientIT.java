@@ -35,7 +35,8 @@ class TrackingClientIT {
 
     @Test
     void getAllTracking() {
-        List<Tracking> allTracking = trackingClient.getAllTracking();
+        Response response = trackingClient.getAllTracking(0, 10);
+        List<Tracking> allTracking = response.getContent();
 
         assertNotNull(allTracking);
         assertTrue(allTracking.size() > 0);
@@ -47,7 +48,8 @@ class TrackingClientIT {
 
     @Test
     void createTracking() {
-        List<Tracking> allTracking = trackingClient.getAllTracking();
+        Response response = trackingClient.getAllTracking(0, 10);
+        List<Tracking> allTracking = response.getContent();
         assertNotNull(allTracking);
         for (int i = 0; i < allTracking.size(); i++) {
             logger.info(String.valueOf(allTracking.get(i)));
@@ -61,7 +63,8 @@ class TrackingClientIT {
         assertEquals("Test Note", created.getTrackingNote());
         assertEquals(1L, created.getUser());
 
-        List<Tracking> updatedTracking = trackingClient.getAllTracking();
+        Response updatedResponse = trackingClient.getAllTracking(0, 10);
+        List<Tracking> updatedTracking = updatedResponse.getContent();
         assertNotNull(updatedTracking);
         logger.info("Updated List:");
         for (int i = 0; i < updatedTracking.size(); i++) {
@@ -86,7 +89,8 @@ class TrackingClientIT {
 
     @Test
     void deleteTracking() {
-        List<Tracking> allTracking = trackingClient.getAllTracking();
+        Response response = trackingClient.getAllTracking(0, 10);
+        List<Tracking> allTracking = response.getContent();
         assertNotNull(allTracking);
         for (int i = 0; i < allTracking.size(); i++) {
             logger.info(String.valueOf(allTracking.get(i)));
@@ -97,7 +101,8 @@ class TrackingClientIT {
         Tracking deleted = trackingClient.getTracking("7");
         assertNull(deleted);
 
-        List<Tracking> updatedTracking = trackingClient.getAllTracking();
+        Response updatedResponse = trackingClient.getAllTracking(0, 10);
+        List<Tracking> updatedTracking = updatedResponse.getContent();
         assertNotNull(updatedTracking);
         logger.info("Updated List:");
         for (int i = 0; i < updatedTracking.size(); i++) {
