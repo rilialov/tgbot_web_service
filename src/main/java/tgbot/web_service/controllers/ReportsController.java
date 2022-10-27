@@ -9,6 +9,7 @@ import tgbot.web_service.service.Response;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -23,31 +24,27 @@ public class ReportsController {
     }
 
     @GetMapping
-    public String reportsList(Integer page, Integer size, Model model) {
-        if (page == null) {
-            page = 1;
-        }
-        if (size == null) {
-            size = 10;
-        }
-        Response response = reportClient.getAllReports(page - 1, size);
+    public String reportsList(Optional<Integer> page, Optional<Integer> size, Model model) {
+        int currentPage = page.orElse(1);
+        int pageSize = size.orElse(10);
+        Response response = reportClient.getAllReports(currentPage-1, pageSize);
         model.addAttribute("reports", response.getContent());
         model.addAttribute("totalPages", response.getTotalPages());
         List<Integer> pageNumbers;
-        if (page < response.getTotalPages()) {
-            if (page > 1) {
-                pageNumbers = IntStream.rangeClosed(page - 1, page + 1).boxed().collect(Collectors.toList());
-            } else pageNumbers = IntStream.rangeClosed(page, page + 1).boxed().collect(Collectors.toList());
+        if (currentPage < response.getTotalPages()) {
+            if (currentPage > 1) {
+                pageNumbers = IntStream.rangeClosed(currentPage - 1, currentPage + 1).boxed().collect(Collectors.toList());
+            } else pageNumbers = IntStream.rangeClosed(currentPage, currentPage + 1).boxed().collect(Collectors.toList());
         } else {
             if (response.getTotalPages() == 1) {
-                pageNumbers = IntStream.rangeClosed(page, page).boxed().collect(Collectors.toList());
-            } else pageNumbers = IntStream.rangeClosed(page - 1, page).boxed().collect(Collectors.toList());
+                pageNumbers = IntStream.rangeClosed(currentPage, currentPage).boxed().collect(Collectors.toList());
+            } else pageNumbers = IntStream.rangeClosed(currentPage - 1, currentPage).boxed().collect(Collectors.toList());
         }
         model.addAttribute("pageNumbers", pageNumbers);
-        model.addAttribute("page", page);
+        model.addAttribute("page", currentPage);
         List<Integer> sizes = Arrays.asList(10, 15, 20);
         model.addAttribute("sizes", sizes);
-        model.addAttribute("pageSize", size);
+        model.addAttribute("pageSize", pageSize);
         return "report/reportsList";
     }
 }
