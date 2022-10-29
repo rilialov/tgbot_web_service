@@ -21,8 +21,10 @@ public class TeamClient extends WebServiceGatewaySupport {
                         new SoapActionCallback(NAMESPACE_URI + "/GetTeamByIdRequest"));
     }
 
-    public GetAllTeamsResponse getAllTeams() {
+    public GetAllTeamsResponse getAllTeams(int page, int size) {
         GetAllTeamsRequest getAllTeamsRequest = new GetAllTeamsRequest();
+        getAllTeamsRequest.setPage(page);
+        getAllTeamsRequest.setSize(size);
         return (GetAllTeamsResponse) getWebServiceTemplate().
                 marshalSendAndReceive(SERVER_URI, getAllTeamsRequest,
                         new SoapActionCallback(NAMESPACE_URI + "/GetAllTeamsRequest"));

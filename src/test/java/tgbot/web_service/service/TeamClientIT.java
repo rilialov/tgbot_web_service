@@ -1,6 +1,8 @@
 package tgbot.web_service.service;
 
 import org.junit.jupiter.api.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import tgbot.users.service.GetAllTeamsResponse;
@@ -16,6 +18,8 @@ import static org.junit.jupiter.api.Assertions.*;
 @SpringBootTest(classes = UsersServiceClientsConfiguration.class)
 class TeamClientIT {
 
+    private static final Logger logger = LoggerFactory.getLogger(TeamClientIT.class);
+
     @Autowired
     private TeamClient teamClient;
 
@@ -26,15 +30,21 @@ class TeamClientIT {
 
         assertEquals("Admin Team", teamDTO.getTeamName());
         assertEquals("Grey", teamDTO.getTeamColor());
+        logger.info(teamDTO.getTeamName());
     }
 
     @Test
     void getAllTeams() {
-        GetAllTeamsResponse allTeamsResponse = teamClient.getAllTeams();
+        GetAllTeamsResponse allTeamsResponse = teamClient.getAllTeams(1,10);
         List<TeamDTO> teamsList = allTeamsResponse.getTeamsList();
 
         assertNotNull(teamsList);
         assertTrue(teamsList.size() > 0);
+
+        logger.info("Total pages: " + allTeamsResponse.getTotalPages());
+        for (int i = 0; i < teamsList.size(); i++) {
+            logger.info(teamsList.get(i).getTeamName());
+        }
     }
 
     @Test
