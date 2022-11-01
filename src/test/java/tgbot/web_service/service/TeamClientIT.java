@@ -30,7 +30,7 @@ class TeamClientIT {
 
         assertEquals("Admin Team", teamDTO.getTeamName());
         assertEquals("Grey", teamDTO.getTeamColor());
-        logger.info(teamDTO.getTeamName());
+        logger.info(teamDTO.getTeamName() + " " + teamDTO.getTeamColor());
     }
 
     @Test

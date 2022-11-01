@@ -1,6 +1,8 @@
 package tgbot.web_service.service;
 
 import org.junit.jupiter.api.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import tgbot.users.service.GetAllUsersResponse;
@@ -16,6 +18,8 @@ import static org.junit.jupiter.api.Assertions.*;
 @SpringBootTest(classes = UsersServiceClientsConfiguration.class)
 class UserClientIT {
 
+    private static final Logger logger = LoggerFactory.getLogger(UserClientIT.class);
+
     @Autowired
     private UserClient userClient;
 
@@ -26,6 +30,7 @@ class UserClientIT {
 
         assertEquals("Porter",userDTO.getFirstName());
         assertEquals("ultricies", userDTO.getNickname());
+        logger.info(userDTO.getFirstName() + " " + userDTO.getNickname());
     }
 
     @Test
@@ -35,15 +40,21 @@ class UserClientIT {
 
         assertEquals("Porter",userDTO.getFirstName());
         assertEquals(1L, userDTO.getChatID());
+        logger.info(userDTO.getFirstName() + " " + userDTO.getNickname());
     }
 
     @Test
     void getAllUsers() {
-        GetAllUsersResponse allUsersResponse = userClient.getAllUsers();
+        GetAllUsersResponse allUsersResponse = userClient.getAllUsers(1,10);
         List<UserDTO> usersList = allUsersResponse.getUsersList();
 
         assertNotNull(usersList);
         assertTrue(usersList.size() > 0);
+
+        logger.info("Total pages: " + allUsersResponse.getTotalPages());
+        for (int i = 0; i < usersList.size(); i++) {
+            logger.info(usersList.get(i).getFirstName());
+        }
     }
 
     @Test

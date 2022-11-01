@@ -29,8 +29,10 @@ public class UserClient extends WebServiceGatewaySupport {
                         new SoapActionCallback(NAMESPACE_URI + "/GetUserByNickRequest"));
     }
 
-    public GetAllUsersResponse getAllUsers() {
+    public GetAllUsersResponse getAllUsers(int page, int size) {
         GetAllUsersRequest getUsersRequest = new GetAllUsersRequest();
+        getUsersRequest.setPage(page);
+        getUsersRequest.setSize(size);
         return (GetAllUsersResponse) getWebServiceTemplate()
                 .marshalSendAndReceive(SERVER_URI, getUsersRequest,
                         new SoapActionCallback(NAMESPACE_URI + "/GetUsersRequest"));
