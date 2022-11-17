@@ -1,0 +1,64 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <title th:text="${title}"></title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <!--/*/ <th:block th:include="template.html :: stylesheet"></th:block> /*/-->
+</head>
+<body>
+<div class="all">
+    <header>
+        <div th:insert="~{template :: header}"></div>
+    </header>
+    <main>
+        <div class="container">
+            <div class="row">
+                <div class="col-2">
+                    <div th:insert="~{template_nav :: menu}"></div>
+                </div>
+                <div class="col-10">
+                    <h2 th:text="${title}"></h2>
+                    <div class="row">
+                        <div class="col container">
+                            <form th:object="${user}" th:action="@{/users}" method="post">
+                                <input type="hidden" th:field="*{chatID}"/>
+                                <div class="form-group">
+                                    <label for="nickname">Nickname:</label>
+                                    <input class="form-control" type="text" id="nickname"
+                                           th:field="*{nickname}" maxlength="30" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="firstName">First Name:</label>
+                                    <input class="form-control" type="text" id="firstName"
+                                           th:field="*{firstName}" maxlength="30" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="lastName">Last Name:</label>
+                                    <input class="form-control" type="text" id="lastName"
+                                           th:field="*{lastName}" maxlength="30" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="team">Team:</label>
+                                    <input class="form-control" type="text" id="team"
+                                           th:field="*{team.teamName}" maxlength="30" required>
+                                </div>
+                                <div class="form-group mb-2">
+                                    <label for="role">Role:</label>
+                                    <input class="form-control" type="text" id="role"
+                                           th:field="*{role}" maxlength="30" required>
+                                </div>
+                                <button type="submit" class="btn btn-primary">OK</button>
+                            </form>
+                        </div>
+                        <div class="col"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <footer>
+        <div th:insert="~{template :: footer}"></div>
+    </footer>
+</div>
+</body>
+</html>
